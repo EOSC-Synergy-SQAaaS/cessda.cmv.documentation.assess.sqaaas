@@ -1,0 +1,60 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.cmv.documentation:
+      branch: main
+      repo: https://github.com/cessda/cessda.cmv.documentation
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.cmv.documentation git:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-wheat-havanese.sh
+        container: qc.acc_surly-blue-crane
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.cmv.documentation find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-ivory-ant.sh
+        container: qc.doc_flimsy-rust-tarsier
+      github.com/cessda/cessda.cmv.documentation git:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-auburn-bear.sh
+        container: qc.doc_randy-lemon-newfoundland
+      github.com/cessda/cessda.cmv.documentation markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-rose-goose.sh
+        container: qc.doc_clammy-ultramarine-bloodhound
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.cmv.documentation licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-flax-malamute.sh
+        container: qc.lic_snoopy-cobalt-goat
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.cmv.documentation checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-corn-serval.sh
+        container: qc.sty_grumpy-dandelion-dunker
+      github.com/cessda/cessda.cmv.documentation jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-fuchsia-uakari.sh
+        container: qc.sty_scummy-amber-audemer
+      github.com/cessda/cessda.cmv.documentation rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-sepia-spaniel.sh
+        container: qc.sty_squirrely-cinnabar-okapi
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.cmv.documentation get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-asparagus-markhor.sh
+        container: qc.ver_trippy-red-centipede
+timeout: 5400
